@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:tryonemore/provider/providers.dart';
+import 'package:tryonemore/views/product_page.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -19,16 +21,21 @@ class HomePage extends ConsumerWidget {
                 itemBuilder: (context,index){
                   final category = data[index];
                   return Card(
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ClipRRect(
-                              borderRadius: BorderRadiusGeometry.circular(10),
-                              child: Image.network(category.image,fit: BoxFit.cover,),
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(()=>ProductPage(cateId: category.id));
+                      },
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                                borderRadius: BorderRadiusGeometry.circular(10),
+                                child: Image.network(category.image,fit: BoxFit.cover,),
+                            ),
                           ),
-                        ),
-                        Text(category.name)
-                      ],
+                          Text(category.name)
+                        ],
+                      ),
                     ),
                   );
                 });
