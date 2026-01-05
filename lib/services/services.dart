@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:tryonemore/model/product.dart';
 
@@ -8,22 +7,32 @@ import '../model/category.dart';
 class Services {
   static final dio = Dio();
 
-  static Future getCategory() async{
-    try{
+  static Future getCategory() async {
+    try {
       final response = await dio.get(Api.categoryUrl);
-      return (response.data as List).map((e)=> Category.fromJson(e)).toList();
-    }on DioException catch(err){
+      return (response.data as List).map((e) => Category.fromJson(e)).toList();
+    } on DioException catch (err) {
       throw err;
     }
   }
 
-  static Future getProductByCate(int cateId) async{
-    try{
+  static Future getProductByCate(int cateId) async {
+    try {
       final response = await dio.get("${Api.productByCateUrl}$cateId");
-      return (response.data as List).map((e)=>Product.fromJson(e)).toList();
-  }
-    on DioException catch(err){
+      return (response.data as List).map((e) => Product.fromJson(e)).toList();
+    } on DioException catch (err) {
       throw err;
-}
-}
+    }
+  }
+
+  static Future getSingleProductById(int productId)async{
+    try{
+      final response = await dio.get('${Api.singleProductById}$productId');
+      print('isitOk----------------------------------ok==========');
+      print('${Api.singleProductById}$productId');
+      return Product.fromJson(response.data);
+    }on DioException catch(err){
+      throw err;
+    }
+  }
 }
