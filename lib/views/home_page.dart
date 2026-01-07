@@ -11,7 +11,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final state = ref.watch(Providers.categoryProvider);
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text('Categories')),),
+      appBar: AppBar(title: Center(child: Text('Categories')),backgroundColor: Colors.deepPurple,),
       body: state.when(
           data: (data){
             return GridView.builder(
